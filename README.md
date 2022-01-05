@@ -23,7 +23,7 @@ typedef struct
     float peso;
     int numero_de_dadivas;
     char tipo_sanguineo [3];
-    char rh;   //Rh ('+' ou '-')
+    char rh[2];   //Rh ('+' ou '-')
 } dador_tipo;
 
 int procurar_dador (dador_tipo dador[], int num, int qtdDADORES)
@@ -79,7 +79,7 @@ void inicializar_dadores(dador_tipo dador[], int *qtdDADORES) // Insere 5 dadore
     dador[0].peso=68.77;
     dador[0].numero_de_dadivas=110;
     strcpy(dador[0].tipo_sanguineo,"O");
-    dador[0].rh='+';
+    strcpy(dador[0].rh,"+");
 
     dador[1].num=111112;
     strcpy(dador[1].nome,"Dennis Ritchie");
@@ -89,7 +89,7 @@ void inicializar_dadores(dador_tipo dador[], int *qtdDADORES) // Insere 5 dadore
     dador[1].peso=70.77;
     dador[1].numero_de_dadivas=63;
     strcpy(dador[1].tipo_sanguineo,"AB");
-    dador[1].rh='-';
+    strcpy(dador[1].rh,"-");
 
     dador[2].num=111113;
     strcpy(dador[2].nome,"Marcelo Rebelo de Sousa");
@@ -99,7 +99,7 @@ void inicializar_dadores(dador_tipo dador[], int *qtdDADORES) // Insere 5 dadore
     dador[2].peso=55.77;
     dador[2].numero_de_dadivas=2;
     strcpy(dador[2].tipo_sanguineo,"O");
-    dador[2].rh='+';
+    strcpy(dador[2].rh,"+");
 
     dador[3].num=111114;
     strcpy(dador[3].nome,"Catarina Furtado");
@@ -109,7 +109,7 @@ void inicializar_dadores(dador_tipo dador[], int *qtdDADORES) // Insere 5 dadore
     dador[3].peso=71.77;
     dador[3].numero_de_dadivas=21;
     strcpy(dador[3].tipo_sanguineo,"AB");
-    dador[3].rh='+';
+    strcpy(dador[3].rh,"+");
 
     dador[4].num=111115;
     strcpy(dador[4].nome,"Greta Thunberg");
@@ -119,7 +119,7 @@ void inicializar_dadores(dador_tipo dador[], int *qtdDADORES) // Insere 5 dadore
     dador[4].peso=57.77;
     dador[4].numero_de_dadivas=43;
     strcpy(dador[4].tipo_sanguineo,"A");
-    dador[4].rh='-';
+    strcpy(dador[4].rh,"-");
 
     *qtdDADORES=5;
 }
@@ -162,19 +162,13 @@ void inserir_dador (dador_tipo dador[], int *qtdDADORES) //permite o registo de 
         printf("Peso:");  //pergunta o peso
         scanf ("%f", &dador [*qtdDADORES].peso);
         printf ("Numero de dadivas:");  //pergunta o numero de dadivas
-
         scanf ("%d", &dador [*qtdDADORES].numero_de_dadivas);
         printf ("Tipo sanguineo:");  //pergunta o tipo sanguineo
         scanf ("%s", &dador [*qtdDADORES].tipo_sanguineo);
         fflush(stdin);
         printf ("Rh:");  //pergunta o rh
         fflush(stdin);
-        scanf ("%c", &dador [*qtdDADORES].rh);
-        while ((dador [*qtdDADORES].rh !='+') && (dador [*qtdDADORES].rh!='-'))
-        {
-            printf("Insira novamente\n");
-            scanf("%c", &dador [*qtdDADORES].rh);
-        }
+        scanf ("%s", &dador [*qtdDADORES].rh);
         printf ("Se deseja inserir outro dador digite 1 se pretende sair digite 2:");
         scanf ("%d", &n);
         *qtdDADORES+=1;
@@ -223,26 +217,26 @@ void consultar_dadores_galardoados (dador_tipo dador[], int qtdDADORES)  //permi
         {
             printf ("MEDALHA DOURADA+CERTIFICADO\n");
             printf("Dador|    Numero|                      Nome|        Data| Peso|Dadivas|Tipo Sanguineo| Rh\n");
-            printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3c\n",p, dador[p].num, dador[p].nome, dador[p].dt.dia, dador[p].dt.mes, dador [p].dt.ano, dador[p].peso, dador[p].numero_de_dadivas, dador[p].tipo_sanguineo,dador[p].rh);
+            printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3s\n",p, dador[p].num, dador[p].nome, dador[p].dt.dia, dador[p].dt.mes, dador [p].dt.ano, dador[p].peso, dador[p].numero_de_dadivas, dador[p].tipo_sanguineo,dador[p].rh);
         }
         else if (dador [p].numero_de_dadivas>=60)
         {
             printf ("\nMEDALHA DOURADA\n");
             printf("Dador|    Numero|                      Nome|        Data| Peso|Dadivas|Tipo Sanguineo| Rh\n");
-            printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3c\n",p, dador[p].num, dador[p].nome, dador[p].dt.dia, dador[p].dt.mes, dador [p].dt.ano, dador[p].peso, dador[p].numero_de_dadivas, dador[p].tipo_sanguineo,dador[p].rh);
+            printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3s\n",p, dador[p].num, dador[p].nome, dador[p].dt.dia, dador[p].dt.mes, dador [p].dt.ano, dador[p].peso, dador[p].numero_de_dadivas, dador[p].tipo_sanguineo,dador[p].rh);
 
         }
         else if (dador [p].numero_de_dadivas>=40)
         {
             printf ("\nMEDALHA PRATEADA\n");
             printf("Dador|    Numero|                      Nome|        Data| Peso|Dadivas|Tipo Sanguineo| Rh\n");
-            printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3c\n",p, dador[p].num, dador[p].nome, dador[p].dt.dia, dador[p].dt.mes, dador [p].dt.ano, dador[p].peso, dador[p].numero_de_dadivas, dador[p].tipo_sanguineo,dador[p].rh);
+            printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3s\n",p, dador[p].num, dador[p].nome, dador[p].dt.dia, dador[p].dt.mes, dador [p].dt.ano, dador[p].peso, dador[p].numero_de_dadivas, dador[p].tipo_sanguineo,dador[p].rh);
         }
         else if (dador [p].numero_de_dadivas>=20)
         {
             printf ("\nMEDALHA COBREADA\n");
             printf("Dador|    Numero|                      Nome|        Data| Peso|Dadivas|Tipo Sanguineo| Rh\n");
-            printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3c\n",p, dador[p].num, dador[p].nome, dador[p].dt.dia, dador[p].dt.mes, dador [p].dt.ano, dador[p].peso, dador[p].numero_de_dadivas, dador[p].tipo_sanguineo,dador[p].rh);
+            printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3s\n",p, dador[p].num, dador[p].nome, dador[p].dt.dia, dador[p].dt.mes, dador [p].dt.ano, dador[p].peso, dador[p].numero_de_dadivas, dador[p].tipo_sanguineo,dador[p].rh);
         }
         else if (dador [p].numero_de_dadivas>=10)
         {
@@ -260,7 +254,7 @@ void mostrar_dadores(dador_tipo dador[], int qtdDADORES)  //mostra todos os dado
     printf("Dador|    Numero|                      Nome|        Data| Peso|Dadivas|Tipo Sanguineo| Rh\n");
     for(k=0; k<qtdDADORES; k++)
     {
-        printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3c\n",k, dador[k].num, dador[k].nome, dador[k].dt.dia, dador[k].dt.mes, dador [k].dt.ano, dador[k].peso, dador[k].numero_de_dadivas, dador[k].tipo_sanguineo,dador[k].rh);
+        printf ("%5d|%10d|%26s|%4d/%2d/%4d|%5.2f|%7d|%14s|%3s\n",k, dador[k].num, dador[k].nome, dador[k].dt.dia, dador[k].dt.mes, dador [k].dt.ano, dador[k].peso, dador[k].numero_de_dadivas, dador[k].tipo_sanguineo,dador[k].rh);
 
     }
 }
@@ -465,7 +459,7 @@ void inserir_local_recolha (local_recolha_tipo local_recolha[],  int *qtdLocaisR
         {
             for (l=0; l < numCo; l++)
             {
-                qtdConcelhos = local_recolha[*qtdLocaisRecolha].numConcelhos; //guarda o numero de concelhos ja existente na cidade
+                qtdConcelhos = local_recolha[*qtdLocaisRecolha].numConcelhos;
                 printf("\nConcelho: ");
                 scanf("%s", &local_recolha[*qtdLocaisRecolha].concelho[qtdConcelhos].nome);
                 printf("\nLocal: ");
@@ -688,7 +682,7 @@ void registar_recolha(recolha_sangue recolhas[], local_recolha_tipo local_recolh
 
             strcpy(recolhas[i].concelho, concelho);
 
-            printf("\nHora: ");
+            printf("Hora: ");
             scanf("%d", &horas);
             printf("Minutos: ");
             scanf("%d", &minutos);
@@ -734,7 +728,7 @@ void medir_sinais_vitais (recolha_sangue recolhas[], dador_tipo dadores[], int q
     char sexo;
     float temp;
     int flag=0;
-    char *a;
+    char a[2];
     dador_tipo *dador;
     data_tipo data;
 
@@ -771,7 +765,7 @@ void medir_sinais_vitais (recolha_sangue recolhas[], dador_tipo dadores[], int q
         scanf("%d", &mes);
         printf("Ano: ");
         scanf ("%d", &ano);
-        v = validar_data(dia, mes, ano); //se retornar 1, a data e valida e a flag fica a 1
+        v = validar_data(dia, mes, ano);
         if(v == 0)
         {
             printf("Data invalida. Introduza novamente. \n");
@@ -814,15 +808,6 @@ void medir_sinais_vitais (recolha_sangue recolhas[], dador_tipo dadores[], int q
     printf ("Pressao diastolica:");
     scanf("%d", &pre_dia);
 
-    recolhas[*qtdRECOLHAS].inf.sexo= sexo;
-    recolhas[*qtdRECOLHAS].inf.periodo=periodo;
-    recolhas[*qtdRECOLHAS].inf.num_vezes=num_vezes;
-
-    recolhas[*qtdRECOLHAS].inf.temp=temp;
-    recolhas[*qtdRECOLHAS].inf.pre_sis=pre_sis;
-    recolhas[*qtdRECOLHAS].inf.pre_dia=pre_dia;
-    recolhas[*qtdRECOLHAS].estado = 'N';
-
     idade = ano - dador->dt.ano;
     if(mes < dador->dt.mes)
     {
@@ -833,28 +818,35 @@ void medir_sinais_vitais (recolha_sangue recolhas[], dador_tipo dadores[], int q
         idade -= 1;
     }
 
+    recolhas[*qtdRECOLHAS].inf.sexo= sexo;
+    recolhas[*qtdRECOLHAS].inf.periodo=periodo;
+    recolhas[*qtdRECOLHAS].inf.num_vezes=num_vezes;
+    recolhas[*qtdRECOLHAS].inf.temp=temp;
+    recolhas[*qtdRECOLHAS].inf.pre_sis=pre_sis;
+    recolhas[*qtdRECOLHAS].inf.pre_dia=pre_dia;
+    recolhas[*qtdRECOLHAS].estado = 'N';
     recolhas[*qtdRECOLHAS].inf.idade=idade;
 
-    if((num_vezes<3 || (sexo == 'F' || sexo == 'f') ) && (num_vezes<4 || (sexo == 'M' || sexo == 'm' )))
+    if((num_vezes<3 && (sexo == 'F' || sexo == 'f') ) || (num_vezes<4 && (sexo == 'M' || sexo == 'm' )))
     {
         if (periodo>=62)
         {
-            if (idade>18 && idade <64)
+            if (pre_dia>=60 && pre_dia<=100 )
             {
                 if (temp<38)
                 {
                     if (pre_sis>=100 && pre_sis<=180)
                     {
-                        if (pre_dia>=60 && pre_dia<=100 )
+                        if (idade>18 && idade <64)
                         {
                             recolhas[*qtdRECOLHAS].estado = 'S';
                             printf ("APTO\n");
                         }
                         else if(idade >= 65)
                         {
-                            printf("Tem autorizacao medica? Responda S/N");
-                            scanf("%c", &a);
-                            if(a == 'S')
+                            printf("Tem autorizacao medica? S/N\n");
+                            scanf("%s", &a);
+                            if(strcmp(a,"S")==0)
                             {
                                 recolhas[*qtdRECOLHAS].estado = 'S';
                                 printf("APTO\n");
@@ -869,7 +861,10 @@ void medir_sinais_vitais (recolha_sangue recolhas[], dador_tipo dadores[], int q
     }
 
     if (recolhas[*qtdRECOLHAS].estado == 'N')
+    {
         printf ("INAPTO\n");
+    }
+
 
     recolhas[*qtdRECOLHAS].qtdSANGUE = 0;
     *qtdRECOLHAS = *qtdRECOLHAS + 1;
@@ -878,11 +873,11 @@ void medir_sinais_vitais (recolha_sangue recolhas[], dador_tipo dadores[], int q
 void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[], dador_tipo dadores[],int qtdDADORES, int qtdRECOLHAS, int qtdLocalRecolha)
 {
     char op_menu_alterar_rastreio;
-    int i,j,num,editar_d,editar_m,editar_a,k,recolha,numConcelhos,dia_novo,mes_novo,ano_novo,v;
+    int i,j,num,k,v;
     int flag_concelho=0,localk,concelhoj,flag_dador=0,flag=0;
-    char concelho[26];
-    int periodo,num_vezes,idade,sexo,temp,pre_sis,pre_dia,qtdSANGUE;
-    char aux;
+    char concelho[26],sexo,a[2];
+    int periodo,num_vezes,idade,pre_sis,pre_dia,qtdSANGUE,dia_novo,mes_novo,ano_novo,recolha,numConcelhos,editar_d,editar_m,editar_a;
+    float temp;
     dador_tipo *dador;
     recolha_sangue *editar;
 
@@ -977,20 +972,9 @@ void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[
         {
             if (recolhas[i].num == num && recolhas[i].data.dia == editar_d && recolhas[i].data.mes == editar_m && recolhas[i].data.ano == editar_a)
             {
-                printf("LISTA DE RECOLHA ATUALIZADA\n");
-                printf("Apto: %c\n", recolhas[i].estado);
-                printf("Data: %d/%d/%d\n",recolhas[i].data.dia,recolhas[i].data.mes,recolhas[i].data.ano);
-                printf("Sexo: %c\n", recolhas[i].inf.sexo);
-                printf("Periodo de doacao: %d\n", recolhas[i].inf.periodo);
-                printf("Numero de vezes que doou este ano: %d\n", recolhas[i].inf.num_vezes);
-                printf("Idade: %d\n", recolhas[i].inf.idade);
-                printf("Temperatura: %1.2f\n", recolhas[i].inf.temp);
-                printf("Pressao sistolica: %d\n", recolhas[i].inf.pre_sis);
-                printf("Pressao diastolica: %d\n", recolhas[i].inf.pre_dia);
-                printf("Quantidade de sangue: %d\n", recolhas[i].qtdSANGUE);
-                printf("Concelho de doacao: %s\n", strcpy(recolhas[i].concelho, concelho));
-                printf("Horas: %d\n", recolhas[i].horas);
-                printf("Minutos: %d\n", recolhas[i].minutos);
+                printf("\nLISTA DE RECOLHA ATUALIZADA\n");
+                printf ("Apto|      Data|Concelho de doacao|Horas|Minutos|Quantidade de Sangue|Sexo|Idade|Periodo de doacao|Numero de vezes|Temperatura|Pressao Sistolica|Pressao Diastolica\n");
+                printf ("%4c|%2d/%2d/%4d|%18s|%5d|%7d|%20d|%4c|%5d|%17d|%15d|%11.2f|%17d|%17d\n",recolhas[i].estado,recolhas[i].data.dia,recolhas[i].data.mes, recolhas[i].data.ano,strcpy(recolhas[i].concelho, concelho),recolhas[i].horas,recolhas[i].minutos,recolhas[i].qtdSANGUE,recolhas[i].inf.sexo,recolhas[i].inf.idade,recolhas[i].inf.periodo,recolhas[i].inf.num_vezes,recolhas[i].inf.temp,recolhas[i].inf.pre_sis,recolhas[i].inf.pre_dia);
             }
 
 
@@ -1003,7 +987,6 @@ void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[
     case '2':
     {
         printf ("Sexo:");
-        scanf ("%c", &sexo);
         fflush(stdin);
         scanf ("%c", &sexo);
         while (sexo != 'F' && sexo != 'M' && sexo != 'f' && sexo != 'm')
@@ -1030,7 +1013,7 @@ void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[
         editar->inf.pre_sis=pre_sis;
         editar->inf.pre_dia=pre_dia;
 
-        if((num_vezes<3 || (sexo == 'F' || sexo == 'f') ) && (num_vezes<4 || (sexo == 'M' || sexo == 'm' )))
+        if((num_vezes<3 && (sexo == 'F' || sexo == 'f') ) || (num_vezes<4 && (sexo == 'M' || sexo == 'm' )))
         {
             if (periodo>=62)
             {
@@ -1048,31 +1031,23 @@ void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[
                 }
             }
         }
+
         if (flag=0)
-            printf("INAPTO\n");
+        {
+        printf("INAPTO\n");
         editar->estado = 'N';
         strcpy(editar->concelho, "NULL");
         editar->qtdSANGUE = 0;
-
+        }
 
         for (i=0; i<qtdRECOLHAS; i++)
         {
             if (recolhas[i].num == num && recolhas[i].data.dia == editar_d && recolhas[i].data.mes == editar_m && recolhas[i].data.ano == editar_a)
             {
                 printf("\n\nLISTA DE RECOLHA ATUALIZADA\n");
-                printf("Apto:%c\n", editar->estado);
-                printf("Data: %d/%d/%d\n",recolhas[i].data.dia,recolhas[i].data.mes,recolhas[i].data.ano);
-                printf(" Sexo: %c\n", editar->inf.sexo);
-                printf(" Periodo de doacao: %d\n",  editar->inf.periodo);
-                printf("Numero de vezes que doou este ano: %d\n", editar->inf.num_vezes);
-                printf(" Idade: %d\n", recolhas[i].inf.idade);
-                printf(" Temperatura: %1.2f\n", editar->inf.temp);
-                printf(" Pressao sistolica: %d\n", editar->inf.pre_sis);
-                printf(" Pressao diastolica: %d\n", editar->inf.pre_dia);
-                printf(" Quantidade de sangue: %d\n", recolhas[i].qtdSANGUE);
-                printf("Concelho de doacao: %s\n", recolhas[i].concelho);
-                printf(" Horas: %d\n", recolhas[i].horas);
-                printf(" Minutos: %d\n", recolhas[i].minutos);
+                printf ("Apto|      Data|Concelho de doacao|Horas|Minutos|Quantidade de Sangue|Sexo|Idade|Periodo de doacao|Numero de vezes|Temperatura|Pressao Sistolica|Pressao Diastolica\n");
+                printf ("%4c|%2d/%2d/%4d|%18s|%5d|%7d|%20d|%4c|%5d|%17d|%15d|%11.2f|%17d|%17d\n",editar->estado,recolhas[i].data.dia,recolhas[i].data.mes, recolhas[i].data.ano,recolhas[i].concelho,recolhas[i].horas,recolhas[i].minutos,recolhas[i].qtdSANGUE,editar->inf.sexo,recolhas[i].inf.idade,editar->inf.periodo,editar->inf.num_vezes,editar->inf.temp,editar->inf.pre_sis,editar->inf.pre_dia);
+
             }
 
 
@@ -1101,20 +1076,11 @@ void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[
         {
             if (recolhas[i].num == num && recolhas[i].data.dia == editar_d && recolhas[i].data.mes == editar_m && recolhas[i].data.ano == editar_a )
             {
-                printf("LISTA DE RECOLHA ATUALIZADA\n");
-                printf("Apto:%c\n", editar->estado);
-                printf("Data: %d/%d/%d\n",recolhas[i].data.dia,recolhas[i].data.mes,recolhas[i].data.ano);
-                printf(" Sexo: %c\n", recolhas[i].inf.sexo);
-                printf(" Periodo de doacao: %d\n", recolhas[i].inf.periodo);
-                printf("Numero de vezes que doou este ano: %d\n", recolhas[i].inf.num_vezes);
-                printf(" Idade: %d\n", recolhas[i].inf.idade);
-                printf(" Temperatura: %1.2f\n", recolhas[i].inf.temp);
-                printf(" Pressao sistolica: %d\n", recolhas[i].inf.pre_sis);
-                printf(" Pressao diastolica: %d\n", recolhas[i].inf.pre_dia);
-                printf(" Quantidade de sangue: %d\n", editar->qtdSANGUE);
-                printf("Concelho de doacao: %s\n", recolhas[i].concelho);
-                printf(" Horas: %d\n", recolhas[i].horas);
-                printf(" Minutos: %d\n", recolhas[i].minutos);
+                printf("\nLISTA DE RECOLHA ATUALIZADA\n");
+                printf ("Apto|      Data|Concelho de doacao|Horas|Minutos|Quantidade de Sangue|Sexo|Idade|Periodo de doacao|Numero de vezes|Temperatura|Pressao Sistolica|Pressao Diastolica\n");
+                printf ("%4c|%2d/%2d/%4d|%18s|%5d|%7d|%20d|%4c|%5d|%17d|%15d|%11.2f|%17d|%17d\n",recolhas[i].estado,recolhas[i].data.dia,recolhas[i].data.mes, recolhas[i].data.ano,recolhas[i].concelho,recolhas[i].horas,recolhas[i].minutos,editar->qtdSANGUE,recolhas[i].inf.sexo,recolhas[i].inf.idade,recolhas[i].inf.periodo,recolhas[i].inf.num_vezes,recolhas[i].inf.temp,recolhas[i].inf.pre_sis,recolhas[i].inf.pre_dia);
+
+
             }
 
 
@@ -1155,6 +1121,7 @@ void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[
         editar->data.dia = dia_novo;
         editar->data.mes = mes_novo;
         editar->data.ano = ano_novo;
+
         idade = editar->data.ano - dador->dt.ano;
         if(editar->data.mes < dador->dt.mes)
         {
@@ -1165,27 +1132,16 @@ void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[
             idade -= 1;
         }
 
-        if (idade >= 18 && idade <= 64)
+        if (idade >= 18 && idade < 65)
         {
             editar->estado = 'S';
             for (i=0; i<qtdRECOLHAS; i++)
             {
-                if (recolhas[i].num == num && editar->data.dia == editar_d && editar->data.mes == editar_m && editar->data.ano == editar_a)
+                if (recolhas[i].num == num && editar->data.dia == dia_novo && editar->data.mes == mes_novo && editar->data.ano == ano_novo)
                 {
-                    printf("LISTA DE RECOLHA ATUALIZADA\n");
-                    printf("Apto: %c\n", editar->estado);
-                    printf("Data: %d/%d/%d\n",editar->data.dia,editar->data.mes,editar->data.ano);
-                    printf("Sexo: %c\n", recolhas[i].inf.sexo);
-                    printf("Periodo de doacao: %d\n", recolhas[i].inf.periodo);
-                    printf("Numero de vezes que doou este ano: %d\n", recolhas[i].inf.num_vezes);
-                    printf("Idade: %d\n", recolhas[i].inf.idade);
-                    printf("Temperatura: %1.2f\n", recolhas[i].inf.temp);
-                    printf("Pressao sistolica: %d\n", recolhas[i].inf.pre_sis);
-                    printf("Pressao diastolica: %d\n", recolhas[i].inf.pre_dia);
-                    printf("Quantidade de sangue: %d\n", recolhas[i].qtdSANGUE);
-                    printf("Concelho de doacao: %s\n",recolhas [i].concelho);
-                    printf("Horas: %d\n", recolhas[i].horas);
-                    printf("Minutos: %d\n", recolhas[i].minutos);
+                printf("\nLISTA DE RECOLHA ATUALIZADA\n");
+                printf ("Apto|      Data|Concelho de doacao|Horas|Minutos|Quantidade de Sangue|Sexo|Idade|Periodo de doacao|Numero de vezes|Temperatura|Pressao Sistolica|Pressao Diastolica\n");
+                printf ("%4c|%2d/%2d/%4d|%18s|%5d|%7d|%20d|%4c|%5d|%17d|%15d|%11.2f|%17d|%17d\n",editar->estado,editar->data.dia,editar->data.mes,editar->data.ano,recolhas[i].concelho,recolhas[i].horas,recolhas[i].minutos,editar->qtdSANGUE,recolhas[i].inf.sexo,recolhas[i].inf.idade,recolhas[i].inf.periodo,recolhas[i].inf.num_vezes,recolhas[i].inf.temp,recolhas[i].inf.pre_sis,recolhas[i].inf.pre_dia);
                 }
 
             }
@@ -1193,43 +1149,34 @@ void editar_rastreio(recolha_sangue recolhas[],local_recolha_tipo local_recolha[
         }
         else if(idade >= 65)
         {
-            printf("Tem autorizacao medica? Responda S/N");
-            scanf("%c", &aux);
-            if(aux == 'S')
+            printf("Tem autorizacao medica? S/N\n");
+            scanf("%s", &a);
+            if(strcmp(a,"S")==0)
             {
                 editar->estado = 'S';
                 for (i=0; i<qtdRECOLHAS; i++)
                 {
-                    if (recolhas[i].num == num && editar->data.dia == editar_d && editar->data.mes == editar_m && editar->data.ano == editar_a )
+                    if (recolhas[i].num == num && editar->data.dia == dia_novo && editar->data.mes == mes_novo && editar->data.ano == ano_novo)
                     {
-                        printf("LISTA DE RECOLHA ATUALIZADA\n");
-                        printf("Apto: %c\n", editar->estado);
-                        printf("Data: %d/%d/%d\n",editar->data.dia,editar->data.mes,editar->data.ano);
-                        printf("Sexo: %c\n", recolhas[i].inf.sexo);
-                        printf("Periodo de doacao: %d\n", recolhas[i].inf.periodo);
-                        printf("Numero de vezes que doou este ano: %d\n", recolhas[i].inf.num_vezes);
-                        printf("Idade: %d\n", recolhas[i].inf.idade);
-                        printf("Temperatura: %1.2f\n", recolhas[i].inf.temp);
-                        printf("Pressao sistolica: %d\n", recolhas[i].inf.pre_sis);
-                        printf("Pressao diastolica: %d\n", recolhas[i].inf.pre_dia);
-                        printf("Quantidade de sangue: %d\n", recolhas[i].qtdSANGUE);
-                        printf("Concelho de doacao: %s\n",recolhas [i].concelho);
-                        printf("Horas: %d\n", recolhas[i].horas);
-                        printf("Minutos: %d\n", recolhas[i].minutos);
+                printf("\nLISTA DE RECOLHA ATUALIZADA\n");
+                printf ("Apto|      Data|Concelho de doacao|Horas|Minutos|Quantidade de Sangue|Sexo|Idade|Periodo de doacao|Numero de vezes|Temperatura|Pressao Sistolica|Pressao Diastolica\n");
+                printf ("%4c|%2d/%2d/%4d|%18s|%5d|%7d|%20d|%4c|%5d|%17d|%15d|%11.2f|%17d|%17d\n",editar->estado,editar->data.dia,editar->data.mes,editar->data.ano,recolhas[i].concelho,recolhas[i].horas,recolhas[i].minutos,editar->qtdSANGUE,recolhas[i].inf.sexo,recolhas[i].inf.idade,recolhas[i].inf.periodo,recolhas[i].inf.num_vezes,recolhas[i].inf.temp,recolhas[i].inf.pre_sis,recolhas[i].inf.pre_dia);
+
                     }
                 }
             }
 
         }
-        else if (idade<18 || aux!= 'S')
+        else
         {
             editar->estado = 'N';
             strcpy(editar->concelho, "NULL");
             editar->qtdSANGUE = 0;
             for (i=0; i<qtdRECOLHAS; i++)
             {
-                if (recolhas[i].num == num && editar->data.dia == editar_d && editar->data.mes == editar_m && editar->data.ano == editar_a )
+                if (recolhas[i].num == num && editar->data.dia == dia_novo && editar->data.mes == mes_novo && editar->data.ano == ano_novo)
                 {
+
                     printf("LISTA DE RECOLHA ATUALIZADA\n");
                     printf("Apto: %c\n", editar->estado);
                     printf("Data: %d/%d/%d\n",editar->data.dia,editar->data.mes,editar->data.ano);
@@ -1304,20 +1251,57 @@ void historico_recolhas_dador (dador_tipo dadores[], recolha_sangue recolhas[],i
 
 }
 
-void percentagem_tipo_sanguineo (dador_tipo dador,int *qtdDADORES)
+void percentagem_tipo_sanguineo (dador_tipo dador[],float qtdDADORES)
 {
-    char i, rh,f;
-    printf ("Tipo sanguineo desejado:");
-    scanf ("%c",rh);
+    char rh[2],tipo_sanguineo[3];
+    float total=0;
+    int i;
+    float percentagem=0;
+    printf ("Tipo sanguineo desejado: ");
+    scanf ("%s",&tipo_sanguineo);
     printf ("Fator desejado:");
-    scanf ("%c",f);
-    for (i=0; i<*qtdDADORES; i++)
+    scanf ("%s",&rh);
+    for (i=0; i<qtdDADORES; i++)
     {
+        if (strcmp(dador[i].tipo_sanguineo,tipo_sanguineo) ==0 && strcmp(dador[i].rh,rh) ==0)
         {
 
+                total=total+1;
         }
     }
+
+    percentagem=total/ qtdDADORES *100;
+    printf ("Percentagem: %.2f",percentagem);
 }
+
+void grafico_recolhas_ano(int qtdRECOLHAS, recolha_sangue recolhas[])
+{
+    int k,i,m,ano=0;
+    float mes[12]={0,0,0,0,0,0,0,0,0,0,0,0};
+    char *meses[12] = {"Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+
+    printf ("Insira o ano pretendido: ");
+    scanf ("%d",&ano);
+    for(k = 0; k < qtdRECOLHAS; k++)
+    {
+        if(ano == recolhas[k].data.ano && recolhas[k].estado == 'S')
+        {
+            mes[recolhas[k].data.mes-1] =mes[recolhas[k].data.mes-1] + 1;
+        }
+    }
+
+    for (i=0;i<12;i++)
+    { printf ("\n%15s",meses[i]);
+        for(m = 0; m < mes[i]; m++)
+        {
+            printf("   *");
+        }
+
+    }
+    printf ("\n\n     Quantidade   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30\n\n");
+
+}
+
 
 int menu_principal ()
 {
@@ -1328,6 +1312,7 @@ int menu_principal ()
     printf("      3- RECOLHA DE SANGUE\n");
     printf("      4- ESTATISTICAS\n");
     printf("      0- SAIR\n");
+    printf("      OPCAO:");
     scanf("%d", &mp);
 
     return mp;
@@ -1343,6 +1328,7 @@ int menu1 ()
     printf("      3- CONSULTAR DADORES GALARDOADOS\n");
     printf("      4- LISTAR TODOS OS DADORES\n");
     printf("      0- SAIR\n");
+    printf("      OPCAO:");
     scanf("%d", &m1);
 
     return m1;
@@ -1358,6 +1344,7 @@ int menu_2 ()
     printf("      3- MOSTRAR LOCAIS DE RECOLHA ABERTOS EM DETERMINADO PERIODO\n");
     printf("      4- LISTAR LOCAIS DE RECOLHA\n");
     printf("      0- SAIR\n");
+    printf("      OPCAO:");
     scanf("%d", &m2);
     return m2;
 }
@@ -1369,15 +1356,28 @@ int menu_3 ()
     printf("      1- NOVA RECOLHA DE SANGUE\n");
     printf("      2- EDITAR RECOLHA\n");
     printf("      3- MEDIR SINAIS VITAIS\n");
-    printf("      3- HISTORICO RECOLHAS DE SANGUE DE UM DADOR\n");
+    printf("      4- HISTORICO RECOLHAS DE SANGUE DE UM DADOR\n");
+    printf("      0- SAIR\n");
+    printf("      OPCAO:");
     scanf("%d", &m3);
     return m3;
 }
 
+int menu_4 ()
+{
+    int m4;
+    printf("      M E N U   E S T A T I S T I C A S\n") ;
+    printf("      1- MOSTRAR PERCENTAGEM DE PESSOA DE UM DETERMINADO GRUPO SANGUINEO\n");
+    printf("      2- MOSTRAR GRAFICO COM EVOLUCAO DE DOACOES EM DETERMINADO ANO\n");
+    printf("      0- SAIR\n");
+    printf("      OPCAO:");
+    scanf ("%d", &m4);
+    return m4;
+}
+
 int main()
 {
-    int qtdDADORES=0,mp,m1,num;
-    int pos = -1;
+    int qtdDADORES=0,mp,m1,num,m4;
     int qtdLocaisRecolha=0,m2;
     int qtdRECOLHAS=0,m3;
     dador_tipo dador[MAX_DADORES];
@@ -1386,6 +1386,7 @@ int main()
     inf_dador inf;
     recolha_sangue recolhas[MAX_RECOLHAS];
     inicializar_local_recolha(local_recolha, &qtdLocaisRecolha);
+    inicializar_dadores(dador, &qtdDADORES);
     do
     {
         mp = menu_principal ();
@@ -1492,14 +1493,34 @@ int main()
                     break;
 
                 }
-
             }
             while (m3 !=0);
             system("cls");
             break;
-        }
+            case 4:
+            system("cls");
+            do
+            {
+                m4 = menu_4 ();
+                switch (m4)
+                {
+                case 1:
+                    system("cls");
+                    mostrar_dadores (dador, qtdDADORES);
+                    percentagem_tipo_sanguineo(dador,qtdDADORES);
+                    break;
+                case 2:
+                    system("cls");
+                    grafico_recolhas_ano(qtdRECOLHAS,recolhas);
+                    break;
+                }
+            } while (m4 !=0);
+            system("cls");
+            break;
     }
-    while (mp != 0);
+    }while (mp != 0);
 
     return 0;
+
 }
+
